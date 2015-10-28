@@ -1,7 +1,10 @@
+import os
 from django import http
 from django.views.generic import View
+from rrdgraph_server import config
 from rrdgraph_server.exceptions import RrdGraphError
 from django.views.static import serve
+from rrdgraphgenerator import get_rrdgraph
 
 
 class RrdGraphView(View):
@@ -9,16 +12,17 @@ class RrdGraphView(View):
         super(RrdGraphView, self).__init__(**kwargs)
 
     def get(self, request, *args, **kwargs):
-        # Return appropriate status code on invalid requests
         try:
-            rrd_graph_path = 'expected_graph.png'
+            rrd_graph_path = _generate_rrdgraph(**kwargs)
         except RrdGraphError, e:
-            # FIXME: Handle SourceDoesNotExist with a different,
-            # cacheable response to keep bogus URLs from hitting
-            # the backend all the time.
+            # Return appropriate status code on invalid requests
             return http.HttpResponse(status=e.status, content=e)
         return serve_static_file(request, rrd_graph_path)
 
 
+def _generate_rrdgraph(device, network_interface, time_scale, graph_title):
+    return get_rrdgraph(os.path.join(config.RRD_FILE_PATH, device + '.rrd'), network_interface, graph_title)
+
+
 def serve_static_file(request, rrd_graph_path):
-    return serve(request, rrd_graph_path, '/home/user/workspace/OSHI-REST-server/tests/rrdgraph_server/')
+    return serve(request, rrd_graph_path)
