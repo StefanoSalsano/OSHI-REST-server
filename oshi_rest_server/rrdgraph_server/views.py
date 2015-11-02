@@ -19,9 +19,20 @@ class RrdGraphView(View):
             return http.HttpResponse(status=e.status, content=e)
         return serve_static_file(request, rrd_graph_path)
 
+_RRDGRAPH_TIME_SCALES = {
+    '10_mins': '-600',
+    '1_hour': '-3600',
+    '1_day': '-86400',
+    '1_week': '-604800',
+    '1_month': '-16934400'
+}
 
-def _generate_rrdgraph(device, network_interface, time_scale, graph_title):
-    return get_rrdgraph(os.path.join(config.RRD_FILE_PATH, device + '.rrd'), network_interface, graph_title)
+
+def _generate_rrdgraph(device, network_interface, rrd_data_source, time_scale, graph_title):
+    end = 'now'
+    start = 'end' + _RRDGRAPH_TIME_SCALES[time_scale]
+    return get_rrdgraph(os.path.join(config.RRD_FILE_PATH, device + '-' + network_interface + '.rrd'), rrd_data_source,
+                        graph_title=graph_title, start_time=start, end_time=end)
 
 
 def serve_static_file(request, rrd_graph_path):

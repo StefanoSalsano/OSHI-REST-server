@@ -34,9 +34,13 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
     'rest_framework',
-    'rrdgraph_server'
+    'rest_framework_swagger',
+    'rrdgraph_server',
 )
+
+STATIC_URL = '/static/'
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
