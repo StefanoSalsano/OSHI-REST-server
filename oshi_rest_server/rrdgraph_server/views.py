@@ -1,17 +1,16 @@
 import os
 from django import http
-from django.views.generic import View
 from rrdgraph_server import config
 from rrdgraph_server.exceptions import RrdGraphError
 from django.views.static import serve
 from rrdgraphgenerator import get_rrdgraph
+from rest_framework import viewsets
+from rest_framework.decorators import detail_route
 
 
-class RrdGraphView(View):
-    def __init__(self, **kwargs):
-        super(RrdGraphView, self).__init__(**kwargs)
-
-    def get(self, request, *args, **kwargs):
+class RrdGraphViewSet(viewsets.ViewSet):
+    @detail_route()
+    def produce_rrd(self, request, *args, **kwargs):
         try:
             rrd_graph_path = _generate_rrdgraph(**kwargs)
         except RrdGraphError, e:

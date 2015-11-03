@@ -1,5 +1,6 @@
 from django.conf.urls import url, patterns, include
-from rrdgraph_server.views import RrdGraphView
+from rest_framework.routers import DefaultRouter
+from rrdgraph_server import views
 
 DEFAULT_FILE_SIGNATURE = 'rrdgraph/%(device)s/%(network_interface)s/%(rrd_data_source)s/%(time_scale)s/%(graph_title)s'
 DEFAULT_REGEX = r'^%s$' % (DEFAULT_FILE_SIGNATURE % {
@@ -10,9 +11,11 @@ DEFAULT_REGEX = r'^%s$' % (DEFAULT_FILE_SIGNATURE % {
     'graph_title': r'(?P<graph_title>.+)',
 })
 
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+router.register(DEFAULT_REGEX, viewset=views.RrdGraphViewSet, base_name='rrdgraph')
+
 urlpatterns = patterns('',
-                       url(regex=DEFAULT_REGEX,
-                           view=RrdGraphView.as_view(),
-                           name="get_rrdgraph"),
+                       url(r'^', include(router.urls)),
                        url(r'^docs/', include('rest_framework_swagger.urls')),
                        )
