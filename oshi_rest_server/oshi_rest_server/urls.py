@@ -2,7 +2,7 @@ from django.conf.urls import url, patterns, include
 from rest_framework.routers import DefaultRouter
 from rrdgraph_server import views
 
-DEFAULT_FILE_SIGNATURE = 'rrdgraph/%(device)s/%(network_interface)s/%(rrd_data_source)s/%(time_scale)s/%(graph_title)s'
+DEFAULT_FILE_SIGNATURE = '%(device)s/%(network_interface)s/%(rrd_data_source)s/%(time_scale)s/%(graph_title)s'
 DEFAULT_REGEX = r'^%s$' % (DEFAULT_FILE_SIGNATURE % {
     'device': r'(?P<device>.+)',
     'network_interface': r'(?P<network_interface>.+)',
