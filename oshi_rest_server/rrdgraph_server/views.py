@@ -8,9 +8,15 @@ from rest_framework import viewsets
 from rest_framework.decorators import detail_route
 
 
-class RrdGraphViewSet(viewsets.ViewSet):
-    @detail_route()
-    def produce_rrd(self, request, *args, **kwargs):
+class RrdtoolViewSet(viewsets.ViewSet):
+    @detail_route(url_path='rrdgraph')
+    def produce_rrdgraph(self):
+        """
+            network_interface -- Network interface (port)
+            rrd_data_source -- RRD DS
+            time_scale -- Time Scale
+            graph_title -- Graph title
+        """
         try:
             rrd_graph_path = _generate_rrdgraph(**kwargs)
         except RrdGraphError, e:
