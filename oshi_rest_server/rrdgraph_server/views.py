@@ -6,19 +6,26 @@ from django.views.static import serve
 from rrdgraphgenerator import get_rrdgraph
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route
+from rest_framework.permissions import AllowAny
 
 
 class RrdtoolViewSet(viewsets.ViewSet):
-    @detail_route(url_path='rrdgraph')
-    def produce_rrdgraph(self):
+    @detail_route(url_path='rrdgraph', permission_classes=[AllowAny])
+    def produce_rrdgraph(self, request, **kwargs):
         """
             network_interface -- Network interface (port)
             rrd_data_source -- RRD DS
             time_scale -- Time Scale
             graph_title -- Graph title
         """
+        device = kwargs.get('pk')
+        network_interface = request.query_params.get('network_interface')
+        rrd_data_source = request.query_params.get('rrd_data_source')
+        time_scale = request.query_params.get('time_scale')
+        graph_title = request.query_params.get('graph_title')
+
         try:
-            rrd_graph_path = _generate_rrdgraph(**kwargs)
+            rrd_graph_path = _generate_rrdgraph(device, network_interface, rrd_data_source, time_scale, graph_title)
         except RrdGraphError, e:
             # Return appropriate status code on invalid requests
             return http.HttpResponse(status=e.status, content=e)
