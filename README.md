@@ -23,6 +23,7 @@ The available options are:
     
     sudo ./OSHI-REST-server.sh --mode setup
     ```
+    
 ## Run instructions
 
 1. Run the server:
@@ -31,3 +32,10 @@ The available options are:
     
     ./OSHI-REST-server.sh --mode run
     ```
+
+## Access the server
+You can find an instance of Swagger UI running @ http://localhost:8000/docs/ where localhost is the host running this server, on the 8000 port.
+
+## Available settings
+### rrdgraph_server.config.py
+- RRD_FILE_PATH: set the path where the RRD files are stored
