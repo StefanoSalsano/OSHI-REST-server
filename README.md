@@ -34,7 +34,7 @@ The available options are:
     ```
 
 ## Access the server
-You can find an instance of Swagger UI running @ http://localhost:8000/docs/ where localhost is the host running this server, on the 8000 port.
+You can find an instance of Swagger UI running @ [localhost:8000](http://localhost:8000/docs/) where localhost is the host running this server, on the 8000 port.
 
 ## Available settings
 ### rrdgraph_server.config.py
