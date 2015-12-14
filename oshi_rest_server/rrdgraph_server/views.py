@@ -25,16 +25,21 @@ class RrdtoolViewSet(viewsets.ViewSet):
                   type: string
                   paramType: path
                 - name: rrd_data_source
-                  description: RRD data source. Must be defined in the specified RRD file
+                  description: "RRD data source. Must be defined in the specified RRD file. For simplicity we set this
+                                as an enumeration of data sources available in RRDs produced by OSHI-monitoring. It
+                                could be set to the name of any data source available in the specified RRD."
                   required: true
                   type: string
                   paramType: query
+                  allowMultiple: false
+                  enum: ["rx_bytes","tx_bytes","rx_packets","tx_packets","sdn_rx_bytes","sdn_tx_bytes","sdn_rx_packets",
+                         "sdn_tx_packets"]
                 - name: time_scale
                   description: Graph time scale
                   required: true
                   type: string
                   paramType: query
-                  allowMultiple: true
+                  allowMultiple: false
                   enum: ["10_mins","1_hour","1_day","1_week","1_month"]
                 - name: graph_title
                   description: Graph title
