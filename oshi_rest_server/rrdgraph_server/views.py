@@ -19,7 +19,8 @@ class RrdtoolViewSet(viewsets.ViewSet):
             parameters:
                 - name: pk
                   description: "RRD file name (including extension). Must be present in the
-                               rrdgraph_server.config.RRD_FILE_PATH directory"
+                               rrdgraph_server.config.RRD_FILE_PATH directory, configured in
+                               OSHI-REST-server/oshi_rest_server/rrdgraph_server/config.py"
                   required: true
                   type: string
                   paramType: path
@@ -34,6 +35,7 @@ class RrdtoolViewSet(viewsets.ViewSet):
                   type: string
                   paramType: query
                   allowMultiple: true
+                  enum: ["10_mins","1_hour","1_day","1_week","1_month"]
                 - name: graph_title
                   description: Graph title
                   required: false
