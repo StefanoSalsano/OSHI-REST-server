@@ -40,5 +40,5 @@ You can find an instance of Swagger UI running @ http://localhost:8000/docs/ whe
 For the .png generation service, the OSHI-Monitoring tool should be up and running, see https://github.com/netgroup/OSHI-monitoring
 
 ## Available settings
-### rrdgraph_server.config.py
-- RRD_FILE_PATH: set the path where the RRD files are stored
+### OSHI-REST-server/oshi_rest_server/rrdgraph_server/config.py
+- RRD_FILE_PATH: set the path where the RRD files are stored (NB: RDD files are created by OSHI-monitoring)
