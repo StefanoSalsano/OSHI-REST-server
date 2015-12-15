@@ -18,7 +18,7 @@ class RrdtoolViewSet(viewsets.ViewSet):
             parameters_strategy: replace
             parameters:
                 - name: pk
-                  description: "RRD file name (including extension). Must be present in the
+                  description: "RRD file name (excluding extension). Must be present in the
                                rrdgraph_server.config.RRD_FILE_PATH directory, configured in
                                OSHI-REST-server/oshi_rest_server/rrdgraph_server/config.py"
                   required: true
@@ -47,7 +47,7 @@ class RrdtoolViewSet(viewsets.ViewSet):
                   type: string
                   paramType: query
         """
-        rrd_file_name = kwargs.get('pk')
+        rrd_file_name = kwargs.get('pk') + '.rrd'
         rrd_data_source = request.query_params.get('rrd_data_source')
         time_scale = request.query_params.get('time_scale')
         graph_title = request.query_params.get('graph_title')
