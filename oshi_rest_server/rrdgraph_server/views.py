@@ -76,4 +76,5 @@ def _generate_rrdgraph(rrd_file_name, rrd_data_source, time_scale, graph_title):
 
 
 def serve_static_file(request, rrd_graph_path):
-    return serve(request, rrd_graph_path)
+    rrd_graph_path = unicode(rrd_graph_path, "ascii")
+    return serve(request, rrd_graph_path, document_root='/')
