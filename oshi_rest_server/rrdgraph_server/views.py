@@ -50,7 +50,7 @@ class RrdtoolViewSet(viewsets.ViewSet):
         rrd_file_name = kwargs.get('pk') + '.rrd'
         rrd_data_source = request.query_params.get('rrd_data_source')
         time_scale = request.query_params.get('time_scale')
-        graph_title = request.query_params.get('graph_title')
+        graph_title = '"' + request.query_params.get('graph_title') + '"'
 
         try:
             rrd_graph_path = _generate_rrdgraph(rrd_file_name, rrd_data_source, time_scale, graph_title)
