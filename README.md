@@ -47,21 +47,14 @@ the OSHI-monitoring tool should be up and running, see https://github.com/netgro
 
 test the generation of .png using the Swagger UI linked above, or these example REST URLSs
 
-    ```
-    http://localhost:8000/rrdtool/cro3-eth4/rrdgraph/?rrd_data_source=rx_bytes&time_scale=10_mins
-    ```
-
-    ```
-    http://localhost:8000/rrdtool/cro4-eth2/rrdgraph/?rrd_data_source=rx_bytes&time_scale=10_mins
-    ```
-
+- http://localhost:8000/rrdtool/cro3-eth4/rrdgraph/?rrd_data_source=rx_bytes&time_scale=10_mins
+- http://localhost:8000/rrdtool/cro4-eth2/rrdgraph/?rrd_data_source=rx_bytes&time_scale=10_mins
+    
 you can discover the available .rrd files as follows:
 
     ```
     cat oshi_rest_server/rrdgraph_server/config.py
-    ```
-    
-    ```
+
     ls -ltr /home/user/workspace/OSHI-monitoring/rrd/
     ```
 
