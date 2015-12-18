@@ -33,11 +33,30 @@ The available options are:
     
     ./OSHI-REST-server.sh --mode run
     ```
+    you can also run (from /home/user/workspace/OSHI-REST-server)
+    ```
+    /home/user/workspace/OSHI-REST-server
+    ```
 
 ## Access the server
 You can find an instance of Swagger UI running @ [localhost:8000](http://localhost:8000/docs/) where localhost is the host running this server, on the 8000 port.
 
-For the .png generation service, the OSHI-monitoring tool should be up and running, see https://github.com/netgroup/OSHI-monitoring
+### for the .png generation service
+
+the OSHI-monitoring tool should be up and running, see https://github.com/netgroup/OSHI-monitoring
+
+test the generation of .png using the Swagger UI linked above, or these example REST URLSs
+
+- http://localhost:8000/rrdtool/cro3-eth4/rrdgraph/?rrd_data_source=rx_bytes&time_scale=10_mins
+- http://localhost:8000/rrdtool/cro4-eth2/rrdgraph/?rrd_data_source=rx_bytes&time_scale=10_mins
+    
+you can discover the available .rrd files as follows:
+
+    ```
+    cat oshi_rest_server/rrdgraph_server/config.py
+
+    ls -ltr /home/user/workspace/OSHI-monitoring/rrd/
+    ```
 
 ## Available settings
 ### OSHI-REST-server/oshi_rest_server/rrdgraph_server/config.py
