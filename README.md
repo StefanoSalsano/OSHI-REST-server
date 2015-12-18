@@ -45,10 +45,11 @@ You can find an instance of Swagger UI running @ [localhost:8000](http://localho
 
 the OSHI-monitoring tool should be up and running, see https://github.com/netgroup/OSHI-monitoring
 
-test the generation of .png using the Swagger UI linked above, or these example REST URLSs 
+test the generation of .png using the Swagger UI linked above, or these example REST URLSs
     ```
     http://localhost:8000/rrdtool/cro3-eth4/rrdgraph/?rrd_data_source=rx_bytes&time_scale=10_mins
-    
+    ```
+    ```
     http://localhost:8000/rrdtool/cro4-eth2/rrdgraph/?rrd_data_source=rx_bytes&time_scale=10_mins
     ```
 
